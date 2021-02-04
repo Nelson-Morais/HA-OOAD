@@ -14,8 +14,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.template.loader import get_template
 from django.urls import path
+from ShareCare.views.OfferView import OfferView
+from ShareCare.views.RequestView import RequestView
+from ShareCare.views.MessageView import MessageView
+
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
+
+    path('offer/',OfferView.getOffers ),
+    path('offer/create', OfferView.create),
+    # POST: =!=!)E§=)§)"?!?=?????????????????????
+
+
+    path('request/create', RequestView.create),
+    # POST
+
+    # POST
+
+
+    path('me/offer', OfferView.getPersonalOffers),
+    path('me/incoming', RequestView.getIncomingRequests),
+    path('me/outgoing', RequestView.getOutgoingRequest),
+    path('me/messages', MessageView.getMessages)
 ]
