@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.template.loader import get_template
 from django.urls import path
+
+from ShareCare import views
 from ShareCare.views.OfferView import OfferView
 from ShareCare.views.RequestView import RequestView
 from ShareCare.views.MessageView import MessageView
-
+from ShareCare.views import views
 
 urlpatterns = [
+
+    path("", views.index, name="index"),
 
     path('admin/', admin.site.urls),
 
