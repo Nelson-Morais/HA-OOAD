@@ -18,11 +18,13 @@ from django.urls import path
 #import template:
 from pages.views import index
 from pages.views import lovepage
+from pages.views import offerlist
 
 urlpatterns = [
     #use template:
     path("", index, name="index"),
     path("lovepage/", lovepage, name="lovepage"),
+    path("offerlist/", offerlist, name="offerlist"),
 
     path('admin/', admin.site.urls),
 ]

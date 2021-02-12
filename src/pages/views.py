@@ -55,4 +55,5 @@ def index(response):
     return render(response, "index.html")
 def lovepage(response):
     return render(response, "lovepage.html")
-
+def offerlist(response):
+    return render(response, "offerlist.html")
