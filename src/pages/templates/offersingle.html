@@ -1,0 +1,46 @@
+{% extends "parts/base.html" %}
+{% load static %}
+
+{% block title %}Angebot{% endblock %}
+
+{# Single View of Offer #}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h1>{% lorem 2 w random %}</h1>
+            <h4><small class="text-muted">{% lorem 1 w random %}, 2km entfernt</small></h4>
+            {% lorem 2 p random %}
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Anfrage versenden
+            </button>
+        </div>
+        <div class="col-md-6 my-3">
+            <img src="{% static "img/test.jpg" %}" class="img-fluid img-thumbnail">
+        </div>
+    </div>
+{% endblock %}
+
+{# Form Modal for Creating Request #}
+{% block body_end %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Anfrage verschicken</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-1">
+                        <label for="exampleFormControlTextarea1" class="form-label">Zusätzlicher Text (optional)</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                    <a type="button" class="btn btn-primary" href="{% url "offersingle" %}">Anfrage verschicken</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ block.super }}
+{% endblock body_end %}

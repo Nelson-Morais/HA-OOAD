@@ -15,16 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-#import template:
+# import templates:
 from pages.views import index
-from pages.views import lovepage
 from pages.views import offerlist
+from pages.views import offersingle
+from pages.views import requests
 
 urlpatterns = [
-    #use template:
+    # use templates:
     path("", index, name="index"),
-    path("lovepage/", lovepage, name="lovepage"),
     path("offerlist/", offerlist, name="offerlist"),
+    path("offersingle/", offersingle, name="offersingle"),
+    path("requests/", requests, name="requests"),
 
+    # admin
     path('admin/', admin.site.urls),
 ]
