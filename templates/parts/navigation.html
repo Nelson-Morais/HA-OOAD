@@ -23,39 +23,59 @@
                     <a class="nav-link" href="{% url "requests" %}">Requests</a>
                 </li>
             </ul>
-            {# Right Side: Userlogin & Messages ) #}
+            {# Right Side: Authentification ) #}
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">User</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        &#128276;
-                        <span class="d-md-none"> Mitteilungen</span>
-                    </a>
+                {% if user.is_authenticated %}
+                    {# User Controls #}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username|capfirst }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Meine Angebote</a></li>
+                            <li><a class="dropdown-item" href="#">Meine Anfragen</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url "logout" %}">Ausloggen</a></li>
+                        </ul>
+                    </li>
                     {# Messages List #}
-                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end notification"
-                        aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            &#128276;
+                            <span class="d-md-none"> Mitteilungen</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end notification"
+                            aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li>
                             <span class="dropdown-item-text">
                                 <h5>Neuste Mitteilungen:</h5>
                             </span>
-                        </li>
-                        <li><a class="dropdown-item notification" href="#">
-                            <strong>Anfrage</strong><br>{% lorem 7 w random %}
-                        </a></li>
-                        <li><a class="dropdown-item notification" href="#">
-                            <strong>Antwort</strong><br>{% lorem 7 w random %}
-                        </a></li>
-                        <li><a class="dropdown-item notification" href="#">
-                            <strong>Anfrage</strong><br>{% lorem 7 w random %}
-                        </a></li>
-                        <li><a class="dropdown-item notification" href="#">
-                            <strong>Antwort</strong><br>{% lorem 7 w random %}
-                        </a></li>
-                    </ul>
-                </li>
+                            </li>
+                            <li><a class="dropdown-item notification" href="#">
+                                <strong>Anfrage</strong><br>{% lorem 7 w random %}
+                            </a></li>
+                            <li><a class="dropdown-item notification" href="#">
+                                <strong>Antwort</strong><br>{% lorem 7 w random %}
+                            </a></li>
+                            <li><a class="dropdown-item notification" href="#">
+                                <strong>Anfrage</strong><br>{% lorem 7 w random %}
+                            </a></li>
+                            <li><a class="dropdown-item notification" href="#">
+                                <strong>Antwort</strong><br>{% lorem 7 w random %}
+                            </a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    {# Login/Register #}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "login" %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "signup" %}">Registrieren</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

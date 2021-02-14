@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views import View
 
@@ -53,9 +54,14 @@ class UtilView(View):
 #templates
 def index(response):
     return render(response, "index.html")
+
 def offerlist(response):
     return render(response, "offerlist.html", {"numbers": range(100)})
+
+@login_required(login_url='login')
 def offersingle(response):
     return render(response, "offersingle.html")
+
+@login_required(login_url='login')
 def requests(response):
     return render(response, "requests.html", {"numbers": range(5)})

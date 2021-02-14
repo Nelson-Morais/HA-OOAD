@@ -1,0 +1,14 @@
+{% extends "parts/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }}Registrierung{% endblock title %}
+
+{% block content %}
+    <h1>Registrierung</h1>
+    {# Formular #}
+    <form method="post">
+        {% include "parts/form.html" %}
+        <button type="submit" class="btn btn-primary">Registrieren</button>
+        <a class="btn btn-outline-secondary" href="{% url "login" %}" role="button">Bereits registriert?</a>
+    </form>
+{% endblock %}
