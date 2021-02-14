@@ -1,0 +1,16 @@
+{% extends "parts/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }}- Willkommen{% endblock title %}
+
+{% block content %}
+    {# Introduction #}
+    <div class="text-center mb-3">
+        <h1 class="display-1">:)</h1>
+        Das ist ein Platzhalter!
+        <br>
+        Mach dir ein schönes Lächeln und arbeite entspannt weiter!
+        <br><br>
+        {{ testvar }}
+    </div>
+{% endblock %}
