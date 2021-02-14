@@ -1,21 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="style.css">
-    <title>{% block title %}HI KEVS{% endblock %}</title>
-</head>
+{% extends "parts/base.html" %}
+{% load static %}
 
-<body>
-    <div id="sidebar">
-        {% block sidebar %}
-        <ul>
-            <h1>HI KEVS!</h1>
-        </ul>
-        {% endblock %}
+{% block title %}{{ block.super }}- Willkommen{% endblock title %}
+
+{% block content %}
+    {# Introduction #}
+    <div class="text-center mb-3">
+        <h1>Willkommen bei ShareCare!</h1>
+        {% lorem %}
     </div>
 
-    <div id="content">
-        {% block content %}{% endblock %}
+    {# Engagement hint #}
+    <div class="row justify-content-sm-center mb-4">
+        <div class="col-sm-6">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 class="card-title">Lust mitzumachen?</h3>
+                    <p class="card-text">
+                        Die Registrierung und Nutzung geht schnell und einfach.
+                        <br>
+                        Und ist <u>kostenlos!</u>
+                    </p>
+                   <a class="btn btn-primary" href="{% url "offerlist" %}" role="button">Jetzt mitmachen!</a>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+
+    {# Information boxes #}
+    <div class="row">
+        <div class="col-sm-4 mb-3">
+            <div class="card">
+                <img src="{% static "img/test.jpg" %}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Gratis Angebote finden</h5>
+                    <p class="card-text">{% lorem 20 w %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 mb-4">
+            <div class="card">
+                <img src="{% static "img/test.jpg" %}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Keine Sachen verschwenden</h5>
+                    <p class="card-text">{% lorem 20 w %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 mb-4">
+            <div class="card">
+                <img src="{% static "img/test.jpg" %}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Der Welt was Gutes tun</h5>
+                    <p class="card-text">{% lorem 20 w %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "parts/base.html" %}
+{% load static %}
+
+{% block title %}Neuigkeiten{% endblock %}
+
+{% block content %}
+    {# Introduction #}
+    <h1>Angebote aus deiner Nähe</h1>
+    <div class="dropdown">
+        <button class="btn btn-secondary" type="button" id="notifications"
+                data-bs-toggle="dropdown" aria-expanded="false">
+            &#128276;
+        </button>
+        <ul class="dropdown-menu notification" aria-labelledby="notifications">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">{% lorem %}</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </div>
+{% endblock %}

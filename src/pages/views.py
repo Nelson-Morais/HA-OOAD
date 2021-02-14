@@ -53,6 +53,12 @@ class UtilView(View):
 #templates
 def index(response):
     return render(response, "index.html")
-def lovepage(response):
-    return render(response, "lovepage.html")
+def offerlist(response):
+    return render(response, "offerlist.html", {"numbers": range(100)})
+def offersingle(response):
+    return render(response, "offersingle.html")
+def requests(response):
+    return render(response, "requests.html", {"numbers": range(5)})
+def messages(response):
+    return render(response, "messages.html")
 
