@@ -83,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ShareCare_data',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'ladmin',
+        'PASSWORD': 'student',
         'HOST': 'localhost',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}  # Strict mode for mysql
     }

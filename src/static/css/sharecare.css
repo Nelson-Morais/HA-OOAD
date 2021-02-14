@@ -1,0 +1,10 @@
+/* Notification Bar */
+.dropdown-menu.notification {
+    width: 350px;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.notification ~ li {
+    white-space: normal;
+}
