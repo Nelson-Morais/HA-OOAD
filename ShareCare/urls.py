@@ -16,11 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 # import templates:
-from pages.views import index
-from pages.views import offerlist
-from pages.views import offersingle
-from pages.views import requests
-from pages.views import messages
+from pages.views import *
 
 urlpatterns = [
     # use templates:
@@ -28,7 +24,6 @@ urlpatterns = [
     path("offerlist/", offerlist, name="offerlist"),
     path("offersingle/", offersingle, name="offersingle"),
     path("requests/", requests, name="requests"),
-    path("messages/", messages, name="messages"),
 
     # admin
     path('admin/', admin.site.urls),
