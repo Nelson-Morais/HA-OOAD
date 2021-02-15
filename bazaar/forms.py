@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Offer
+from .models import Request
 
 
 class OfferForm(forms.ModelForm):
@@ -10,7 +11,13 @@ class OfferForm(forms.ModelForm):
             'userowner_id',
             'title',
             'description',
-            'pickup_starttime',
-            'pickup_endtime',
+        ]
+        widgets = {'userowner_id': forms.HiddenInput()}
+
+class RequestForm(forms.ModelForm):
+    class Meta:
+        model = Request
+        fields = [
+            'text'
         ]
         widgets = {'userowner_id': forms.HiddenInput()}
