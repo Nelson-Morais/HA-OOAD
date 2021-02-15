@@ -6,14 +6,35 @@
 {% block content %}
     {# Introduction #}
     <h1>Angebote aus deiner Nähe</h1>
-    {% lorem 1 %}
+    <p>
+        {% lorem 1 %}
+    </p>
+    <a class="btn btn-success" href="{% url 'create_offer' %}" role="button">Neues Angebot erstellen</a>
     <hr class="my-4">
 
     {# Row of Offers #}
-
-        {% for offers in offer %}
-            {{ offers.id }}
-            <br>
+    <div class="row">
+        {% for offer in offers %}
+            {# Offer Card #}
+            <div class="col-sm-6 mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4 my-auto">
+                        <a href="{% url "offer_details" offer_id=offer.id %}">
+                            <img src="{% static "img/test.jpg" %}" class="rounded img-fluid text-center">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ offer.title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                {{ offer.created_at }}</h6>
+                            <p class="card-text">{{ offer.description }}</p>
+                            <a href="{% url "offer_details" offer_id=offer.id %}" class="card-link">Zum Angebot</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
+    </div>
 
 {% endblock %}

@@ -7,9 +7,9 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6">
-            <h1>{% lorem 2 w random %}</h1>
-            <h4><small class="text-muted">{% lorem 1 w random %}, 2km entfernt</small></h4>
-            {% lorem 2 p random %}
+            <h1>{{ offer.title }}</h1>
+            <h4><small class="text-muted">{{ offer.created_at }}</small></h4>
+            <p>{{ offer.description }}</p>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Anfrage versenden
             </button>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-                    <a type="button" class="btn btn-primary" href="{% url "offer_request_creator" offer_id=offer_id %}">Anfrage verschicken</a>
+                    <a type="button" class="btn btn-primary" href="">Anfrage verschicken</a>
                 </div>
             </div>
         </div>

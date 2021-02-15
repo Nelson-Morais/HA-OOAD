@@ -4,8 +4,8 @@
 {% block title %}Meine Angebote{% endblock %}
 
 {% block content %}
-<form action="." method="POST"> {% csrf_token %}
-{{ form.as_p }}
-    <input type="submit" value="Save" />
-</form>
+    <form action="." method="POST">
+        {% include "parts/form.html" %}
+        <button type="submit" class="btn btn-success">Erstellen</button>
+    </form>
 {% endblock %}

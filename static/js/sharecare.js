@@ -1,19 +1,13 @@
 // Handles Notifications in Navbar
 class NotificationHandler {
-    // Constructs the Object
-    constructor() {
-        if(notification_handler == null)
-            this.loadNotifications()
-    }
-
     // Downloads JSON Data for Notifications
     loadNotifications() {
-        $.getJSON("me/notifications/", function (notification_list) {
+        $.getJSON(window.location.origin + "/me/notifications/", function (notification_list) {
             if (notification_list != null) {
                 notification_list.forEach((notification) => {
                     notification_handler.addNotification(
                         notification.title,
-                        notification.message,
+                        notification.content,
                     )
                 })
             } else {
@@ -49,6 +43,4 @@ class NotificationHandler {
         }
     }
 }
-
-// Run initial Setup
 var notification_handler = new NotificationHandler()

@@ -1,11 +1,11 @@
 from django.db import models
 
 
-# Create your models here.
 class OfferModel(models.Model):
     userowner_id = models.IntegerField(default=0)
     title = models.CharField(max_length=512)
     description = models.CharField(max_length=512)
+    created_at = models.DateTimeField(auto_now_add=True)
     is_deleted = models.BooleanField(default=False)
 
 

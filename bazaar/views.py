@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
+
+from notifications.views import add_notification
 from .forms import OfferForm
 from .forms import RequestForm
 from .models import RequestModel, OfferModel
@@ -8,9 +10,9 @@ from .models import RequestModel, OfferModel
 
 # displays a list of new offers of the plattform
 def get_offer_list(request, latitude=0, longitude=0):
-    offer = OfferModel.objects.filter(is_deleted=False)
+    offers = OfferModel.objects.filter(is_deleted=False)
     context = {
-        'offer': offer
+        'offers': offers
     }
     return render(request, "offerlist.html", context)
 
@@ -18,7 +20,12 @@ def get_offer_list(request, latitude=0, longitude=0):
 # displays details of specific offer
 @login_required(login_url='login')
 def get_offer(request, offer_id):
-    return render(request, "offersingle.html", {"offer_id": offer_id, "testvar": offer_id})
+    offer = OfferModel.objects.get(id=offer_id)
+    print(offer)
+    context = {
+        'offer': offer
+    }
+    return render(request, "offersingle.html", context)
 
 
 # displays offer creation form
@@ -29,8 +36,8 @@ def get_offer_creator(request):
         offer = form.save(commit=False)
         offer.userowner_id = request.user.id
         offer.save()
-        # reload form, delete if want to redirect:
-        form = OfferForm()
+        add_notification(request.user.id, "Neues Angebot", offer.title)
+        return redirect('offer_list')
     context = {
         'form': form
     }
