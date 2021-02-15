@@ -27,19 +27,19 @@ urlpatterns = [
     path("", PageView.get_welcome, name="welcome"),
 
     # Bazaar
-    path("offer", OfferView.get_offer_list, name="offer_list"),
-    path("offer/create", OfferView.get_offer_creator, name="offer_creator"),
-    path("offer/<int:offer_id>", OfferView.get_offer, name="offer_details"),
-    path("offer/<int:offer_id>/request", RequestView.save_request_creator, name="offer_request_creator"),
+    path("offer/", get_offer_list, name="offer_list"),
+    path("offer/create/", get_offer_creator, name="create_offer"),
+    path("offer/<int:offer_id>/", get_offer, name="offer_details"),
+    path("offer/<int:offer_id>/request/", save_request_creator, name="offer_request_creator"),
 
     # Personal Section
-    path("me/offer", OfferView.get_personal_offer_list, name="personal_offer_list"),
-    path("me/request", RequestView.get_personal_request_list, name="personal_request_list"),
-    path("me/notifications", MessageView.get_notifications, name="notification_list"),
+    path("me/offer/", get_personal_offer_list, name="personal_offer_list"),
+    path("me/request/", get_personal_request_list, name="personal_request_list"),
+    path("me/notifications/", MessageView.get_notifications, name="notification_list"),
 
     # UserAuth
     path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("signup/", userauth_views.signup, name="signup"),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls)
 ]
