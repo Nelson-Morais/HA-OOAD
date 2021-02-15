@@ -20,6 +20,7 @@ def get_offer_creator(request):
     form = OfferForm(request.POST or None)
     if form.is_valid():
         offer = form.save()
+        print(request.user)
         offer.userowner_id = request.user
         form = OfferForm()
     context = {
