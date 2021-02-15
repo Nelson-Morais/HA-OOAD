@@ -18,7 +18,7 @@ def get_notifications(request):
 
 
 # add a new notification for the user
-def add_notification(request, user_id, title, content):
+def add_notification(user_id, title, content):
     new_notification = Message(user_owner_id=user_id, title=title, content=content)
     new_notification.save()
     return
