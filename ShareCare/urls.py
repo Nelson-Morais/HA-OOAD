@@ -38,7 +38,7 @@ urlpatterns = [
     # Personal Section
     path("me/offer/", get_personal_offer_list, name="personal_offer_list"),
     path("me/request/", get_personal_request_list, name="personal_request_list"),
-    path("me/notifications/", MessageView.get_notifications, name="notification_list"),
+    path("me/notifications/", get_notifications, name="notification_list"),
 
     # UserAuth
     path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
