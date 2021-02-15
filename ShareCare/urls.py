@@ -30,7 +30,10 @@ urlpatterns = [
     path("offer/", get_offer_list, name="offer_list"),
     path("offer/create/", get_offer_creator, name="create_offer"),
     path("offer/<int:offer_id>/", get_offer, name="offer_details"),
-    path("offer/<int:offer_id>/request/", save_request_creator, name="offer_request_creator"),
+    path("offer/<int:offer_id>/request/", get_request_creator, name="offer_request_creator"),
+    #temp
+    path("request/create/", get_request_creator, name="create_request"),
+
 
     # Personal Section
     path("me/offer/", get_personal_offer_list, name="personal_offer_list"),
