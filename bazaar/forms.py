@@ -1,12 +1,12 @@
 from django import forms
 
-from .models import Offer
-from .models import Request
+from .models import OfferModel
+from .models import RequestModel
 
 
 class OfferForm(forms.ModelForm):
     class Meta:
-        model = Offer
+        model = OfferModel
         fields = [
             'userowner_id',
             'title',
@@ -16,7 +16,7 @@ class OfferForm(forms.ModelForm):
 
 class RequestForm(forms.ModelForm):
     class Meta:
-        model = Request
+        model = RequestModel
         fields = [
             'text'
         ]

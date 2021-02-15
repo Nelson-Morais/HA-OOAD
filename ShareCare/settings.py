@@ -39,7 +39,6 @@ INSTALLED_APPS = [
 
     # own apps
     'pages',
-    'actions',
     'bazaar',
     'notifications',
     'userauth',
