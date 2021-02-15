@@ -50,11 +50,12 @@ def get_personal_request_list(request):
 
 # saves data from request creation form (offer details view)
 @login_required(login_url='login')
-def get_request_creator(request):
+def get_request_creator(request, offer_id):
     form = RequestForm(request.POST or None)
     if form.is_valid():
         req = form.save(commit=False)
         req.userowner_id = request.user.id
+        req.offer_id = offer_id
         req.save()
     context = {
         'form': form,
