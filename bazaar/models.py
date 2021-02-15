@@ -12,7 +12,6 @@ class Request(models.Model):
 
     userowner_id = models.IntegerField()
     text = models.CharField(max_length=512)
-
     RequestStatus = (
         ('1','open'),
         ('2','accepted'),
