@@ -32,30 +32,19 @@
                     </li>
                     {# Messages List #}
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                        <a class="nav-link" href="#" id="notificationDropdownTrigger" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             &#128276;
                             <span class="d-md-none"> Mitteilungen</span>
                         </a>
+
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end notification"
-                            aria-labelledby="navbarDarkDropdownMenuLink">
+                            aria-labelledby="notificationDropdownTrigger" id="notificationDropdown">
                             <li>
-                            <span class="dropdown-item-text">
-                                <h5>Neuste Mitteilungen:</h5>
-                            </span>
+                                <span class="dropdown-item-text">
+                                    <h5>Neuste Mitteilungen:</h5>
+                                </span>
                             </li>
-                            <li><a class="dropdown-item notification" href="#">
-                                <strong>Anfrage</strong><br>{% lorem 7 w random %}
-                            </a></li>
-                            <li><a class="dropdown-item notification" href="#">
-                                <strong>Antwort</strong><br>{% lorem 7 w random %}
-                            </a></li>
-                            <li><a class="dropdown-item notification" href="#">
-                                <strong>Anfrage</strong><br>{% lorem 7 w random %}
-                            </a></li>
-                            <li><a class="dropdown-item notification" href="#">
-                                <strong>Antwort</strong><br>{% lorem 7 w random %}
-                            </a></li>
                         </ul>
                     </li>
                 {% else %}
