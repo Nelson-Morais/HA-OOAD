@@ -20,4 +20,5 @@ class RequestForm(forms.ModelForm):
         fields = [
             'text'
         ]
-        widgets = {'userowner_id': forms.HiddenInput()}
+        widgets = {'userowner_id': forms.HiddenInput(),
+                   'offer_id': forms.HiddenInput()}

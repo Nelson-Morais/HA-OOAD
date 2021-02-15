@@ -11,6 +11,7 @@ class Offer(models.Model):
 class Request(models.Model):
 
     userowner_id = models.IntegerField()
+    offer_id = models.IntegerField(default=0)
     text = models.CharField(max_length=512)
     RequestStatus = (
         ('1','open'),
