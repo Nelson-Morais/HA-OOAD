@@ -1,6 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from django.views import View
+from django.db.models import Q
+
+
+
 from notifications.views import add_notification
 from .forms import OfferForm
 from .forms import RequestForm
@@ -59,7 +64,7 @@ def get_personal_request_list(request):
     templist = []
     offers = OfferModel.objects.filter(userowner_id=request.user.id)
     for x in offers:
-        reqs = RequestModel.objects.filter(offer_id=x.id)
+        reqs = RequestModel.objects.filter(~Q(status=3), offer_id=x.id)
         tempdict = {'offer': x,
                     'reqs': reqs}
         templist.append(tempdict)
@@ -84,7 +89,3 @@ def get_request_creator(request, offer_id):
     }
     return render(request, "create_request.html", context)
 
-# displays a list of the users offers
-@login_required(login_url='login')
-def temp_list(request):
-    return render(request, "outgoing.html", {"numbers": range(5)})
