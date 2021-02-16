@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+
 from django.views import View
 from django.db.models import Q
+
+
 
 from notifications.views import add_notification
 from .forms import OfferForm
@@ -11,7 +14,7 @@ from .models import RequestModel, OfferModel
 
 # displays a list of new offers of the plattform
 def get_offer_list(request, latitude=0, longitude=0):
-    offers = OfferModel.objects.filter(is_deleted=False)
+    offers = OfferModel.objects.filter(is_deleted=False).order_by('-created_at')
     context = {
         'offers': offers
     }
@@ -85,3 +88,4 @@ def get_request_creator(request, offer_id):
         'offer_id': offer_id
     }
     return render(request, "create_request.html", context)
+
