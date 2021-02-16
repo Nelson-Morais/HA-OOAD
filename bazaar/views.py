@@ -20,7 +20,6 @@ def get_offer_list(request, latitude=0, longitude=0):
 @login_required(login_url='login')
 def get_offer(request, offer_id):
     offer = OfferModel.objects.get(id=offer_id)
-    print(offer)
     context = {
         'offer': offer
     }
@@ -46,22 +45,27 @@ def get_offer_creator(request):
 # displays a list of the users offers
 @login_required(login_url='login')
 def get_personal_offer_list(request):
-    return render(request, "requests.html", {"numbers": range(5)})
+    offers = OfferModel.objects.filter(userowner_id=request.user.id)
+    context = {
+        'offers': offers
+    }
+    return render(request, "requests.html", context)
 
 
 # displays a list of the users requests to othS er offers
 @login_required(login_url='login')
 def get_personal_request_list(request):
-    global req
-    offer = OfferModel.objects.filter(userowner_id=request.user.id)
-    for x in offer:
-        req = RequestModel.objects.filter(offer_id=x.offer_id)
-
+    global reqs
+    templist = []
+    offers = OfferModel.objects.filter(userowner_id=request.user.id)
+    for x in offers:
+        reqs = RequestModel.objects.filter(offer_id=x.id)
+        tempdict = {'offer': x,
+                    'reqs': reqs}
+        templist.append(tempdict)
     context = {
-        'offer': offer,
-        'req': req
+        'offerlist': templist
     }
-
     return render(request, "requests.html", context)
 
 
@@ -76,7 +80,7 @@ def get_request_creator(request, offer_id):
         req.save()
     context = {
         'form': form,
-        # 'testvar': offer_id
+        'offer_id': offer_id
     }
     return render(request, "create_request.html", context)
 
