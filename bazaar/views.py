@@ -50,7 +50,7 @@ def get_personal_offer_list(request):
     return render(request, "requests.html", {"numbers": range(5)})
 
 
-# displays a list of the users requests to other offers
+# displays a list of the users requests to othS er offers
 @login_required(login_url='login')
 def get_personal_request_list(request):
     global req
