@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views import View
-from apps.notifications.views import add_notification
+
+from apps.bazaar.adapters.notifications_adapter import add_notification
 from .forms import OfferForm
 from .forms import RequestForm
 from .models import RequestModel, OfferModel
