@@ -1,0 +1,11 @@
+{% extends "parts/base.html" %}
+{% load static %}
+
+{% block title %}Meine Angebote{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% include "parts/form.html" %}
+        <button type="submit" class="btn btn-success">Erstellen</button>
+    </form>
+{% endblock %}

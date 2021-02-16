@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # own apps
-    'pages',
-    'bazaar',
-    'notifications',
-    'userauth',
+    'apps.pages',
+    'apps.bazaar',
+    'apps.notifications',
+    'apps.userauth',
 ]
 
 MIDDLEWARE = [
@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ShareCare_data',
-        'USER': 'ladmin',
-        'PASSWORD': 'student',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}  # Strict mode for mysql
     }
