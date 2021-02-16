@@ -11,7 +11,7 @@
     {# List of Owners Offers and their Requests #}
     {% for object in objects %}
         <hr class="my-4 col-lg-8">
-        <div class="row">
+        <div class="row {% if object.request.status == 3 %}opacity-50{% endif %}">
             {# Offer Card #}
             <div class="col-sm-3">
                 <div class="card border-0">
@@ -28,15 +28,25 @@
             </div>
             {# Request belonging to Offer #}
             <div class="col-lg-5 col-sm-9">
-                <div class="card">
+                <div class="card {% if object.request.status == 1 %}text-white bg-success {% endif %}">
                     <div class="card-body">
-                        <a type="button" class="btn-close float-end" aria-label="Close"></a>
+                        {% if object.request.status == 2 %}
+                            <a type="button" class="btn-close float-end" aria-label="Close"
+                               href="{% url "delete_request" request_id=object.request.id %}"></a>
+                        {% endif %}
                         <h5 class="card-title">Deine Anfrage</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ object.request.created_at }}</h6>
+                        <h6 class="card-subtitle mb-2 {% if object.request.status != 2 %}text-muted{% endif %}">{{ object.request.created_at }}</h6>
                         {{ object.request.text }}
                     </div>
                     <div class="card-footer">
-                        <span class="text-muted">Anfrage steht noch aus...</span>
+                        {# Check Request Status #}
+                        {% if object.request.status == 1 %}
+                            <span class="text-muted">Warten auf Antwort...</span>
+                        {% elif object.request.status == 2 %}
+                            <span class="text-white">Anfrage angenommen!</span>
+                        {% elif object.request.status == 3 %}
+                            <span class="text-muted">Abgelehnt.</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>
