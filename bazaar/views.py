@@ -107,3 +107,10 @@ def delete_offer(request, offer_id):
     offer.save()
 
     return render(request, "page_yo", {})
+
+
+def delete_request(request, request_id):
+    request = RequestModel.objects.filter(request_id)
+    request.status = 3
+
+    return render (request, "page yo", {})
