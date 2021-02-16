@@ -16,6 +16,6 @@ class RequestModel(models.Model):
     RequestStatus = (
         ('1', 'open'),
         ('2', 'accepted'),
-        ('3', 'deleted')
+        ('3', 'declined')
     )
     status = models.CharField(max_length=1, choices=RequestStatus, default=1)
