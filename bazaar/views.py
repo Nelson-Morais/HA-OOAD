@@ -1,9 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from django.views import View
-from django.db.models import Q
-
 from notifications.views import add_notification
 from .forms import OfferForm
 from .forms import RequestForm
@@ -11,65 +8,75 @@ from .models import RequestModel, OfferModel
 
 
 # displays a list of new offers of the plattform
-def get_offer_list(request, latitude=0, longitude=0):
+def get_offer_list(request):
     offers = OfferModel.objects.filter(is_deleted=False).order_by('-created_at')
-    context = {
+    return render(request, "offer_list.html", {
         'offers': offers
-    }
-    return render(request, "offerlist.html", context)
+    })
 
 
 # displays details of specific offer
 @login_required(login_url='login')
 def get_offer(request, offer_id):
-    offer = OfferModel.objects.get(id=offer_id)
-    context = {
+    offer = OfferModel.objects.filter(is_deleted=False).get(id=offer_id)
+    return render(request, "offer_single.html", {
         'offer': offer
-    }
-    return render(request, "offersingle.html", context)
+    })
 
 
 # displays offer creation form
 @login_required(login_url='login')
 def get_offer_creator(request):
     form = OfferForm(request.POST or None)
+
     if form.is_valid():
         offer = form.save(commit=False)
         offer.userowner_id = request.user.id
         offer.save()
-        add_notification(request.user.id, "Neues Angebot", offer.title)
+
+        add_notification(request.user.id, "Angebot platziert", offer.title)
         return redirect('offer_list')
-    context = {
+
+    return render(request, "create_offer.html", {
         'form': form
-    }
-    return render(request, "create_offer.html", context)
+    })
 
 
-# displays a list of the users offers
+# displays a list of the users requests to othS er offers
 @login_required(login_url='login')
 def get_personal_offer_list(request):
-    offers = OfferModel.objects.filter(userowner_id=request.user.id)
-    context = {
-        'offers': offers
-    }
-    return render(request, "requests.html", context)
+    object_list = []
+    offers = OfferModel.objects.filter(is_deleted=False).filter(userowner_id=request.user.id).order_by('-created_at')
+
+    for offer in offers:
+        requests = RequestModel.objects.filter(is_deleted=False).filter(offer_id=offer.id).order_by('-created_at')
+        object_list.append({
+            'offer': offer,
+            'requests': requests,
+        })
+
+    return render(request, "my_offer_list.html", {
+        'objects': object_list
+    })
 
 
 # displays a list of the users requests to othS er offers
 @login_required(login_url='login')
 def get_personal_request_list(request):
-    global reqs
-    templist = []
-    offers = OfferModel.objects.filter(userowner_id=request.user.id)
-    for x in offers:
-        reqs = RequestModel.objects.filter(~Q(status=3), offer_id=x.id)
-        tempdict = {'offer': x,
-                    'reqs': reqs}
-        templist.append(tempdict)
-    context = {
-        'offerlist': templist
-    }
-    return render(request, "requests.html", context)
+    object_list = []
+    requests = RequestModel.objects.filter(is_deleted=False).filter(userowner_id=request.user.id).order_by('-created_at')
+
+    for req in requests:
+        offer = OfferModel.objects.get(id=req.offer_id)
+        if not offer.is_deleted:
+            object_list.append({
+                'request': req,
+                'offer': offer,
+            })
+
+    return render(request, "my_request_list.html", {
+        'objects': object_list
+    })
 
 
 # saves data from request creation form (offer details view)
@@ -81,36 +88,63 @@ def get_request_creator(request, offer_id):
         req.userowner_id = request.user.id
         req.offer_id = offer_id
         req.save()
-    context = {
+
+        offer = OfferModel.objects.filter(is_deleted=False).get(id=offer_id)
+        add_notification(request.user.id, "Anfrage verschickt", req.text)
+        add_notification(offer.userowner_id, "Anfrage erhalten!", req.text)
+        return redirect('offer_list')
+
+    return render(request, "create_request.html", {
         'form': form,
         'offer_id': offer_id
-    }
-    return render(request, "create_request.html", context)
+    })
 
 
+# accepts one request from offer, discards all other requests from offer
+@login_required(login_url='login')
 def request_accept(request, offer_id, request_id):
-    requests = RequestModel.objects.filter(offer_id=offer_id)
+    offer = OfferModel.objects.filter(is_deleted=False).get(id=offer_id)
+    offer.is_closed = True
+    offer.save()
 
-    for x in requests:
-        if x.id == request_id:
-            x.status = 2
+    requests = RequestModel.objects.filter(is_deleted=False).filter(offer_id=offer_id).order_by('-created_at')
+    for req in requests:
+        if req.id == request_id:
+            req.status = 2
+            req.save()
+            add_notification(req.userowner_id, "Anfrage angenommen!", offer.title)
         else:
-            x.status = 3
-    requests.save()
+            req.status = 3
+            req.save()
+            add_notification(req.userowner_id, "Anfrage abgelehnt", offer.title)
 
-    return render(request, "page_yo", {})
+    return redirect('personal_offer_list')
 
 
+# deletes the offer
+@login_required(login_url='login')
 def delete_offer(request, offer_id):
-    offer = OfferModel.objects.filter(offer_id)
+    offer = OfferModel.objects.filter(is_deleted=False).get(id=offer_id)
     offer.is_deleted = True
     offer.save()
 
-    return render(request, "page_yo", {})
+    requests = RequestModel.objects.filter(is_deleted=False).filter(offer_id=offer_id)
+    for req in requests:
+        req.is_deleted = True
+        req.save()
+        add_notification(req.userowner_id, "Angebot ihrer Anfrage gelöscht", offer.title)
+
+    add_notification(request.user.id, "Angebot gelöscht", offer.title)
+    return redirect('personal_offer_list')
 
 
+# deletes the request
+@login_required(login_url='login')
 def delete_request(request, request_id):
-    request = RequestModel.objects.filter(request_id)
-    request.status = 3
+    req = RequestModel.objects.filter(is_deleted=False).get(id=request_id)
+    if req.status == 1:
+        req.is_deleted = True
+        req.save()
+        add_notification(request.user.id, "Anfrage gelöscht", req.text)
 
-    return render (request, "page yo", {})
+    return redirect('personal_request_list')

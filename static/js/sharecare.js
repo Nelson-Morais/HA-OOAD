@@ -28,7 +28,7 @@ class NotificationHandler {
             let notification_title = document.createElement("strong")
             let notification_br = document.createElement("br")
 
-            // Fill Elements with Text
+            // Fill Elements with Content
             notification_title.innerText = title
             let notification_text = text
 
