@@ -1,0 +1,55 @@
+{% extends "parts/base.html" %}
+{% load static %}
+
+{% block title %}Meine Anfragen{% endblock %}
+
+{% block content %}
+    {# Introduction #}
+    <h1>Deine Anfragen</h1>
+    {% lorem 1 %}
+
+    {# List of Owners Offers and their Requests #}
+    {% for object in objects %}
+        <hr class="my-4 col-lg-8">
+        <div class="row {% if object.request.status == 3 %}opacity-50{% endif %}">
+            {# Offer Card #}
+            <div class="col-sm-3">
+                <div class="card border-0">
+                    <a href="{% url "offer_details" offer_id=object.offer.id %}">
+                        <img src="{% static "img/ShareCare.png" %}" class="card-img-top rounded">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ object.offer.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {{ object.offer.created_at }}</h6>
+                        <p class="card-text">{{ object.offer.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {# Request belonging to Offer #}
+            <div class="col-lg-5 col-sm-9">
+                <div class="card {% if object.request.status == 2 %}text-white bg-success {% endif %}">
+                    <div class="card-body">
+                        {% if object.request.status == 1 %}
+                            <a type="button" class="btn-close float-end" aria-label="Close"
+                               href="{% url "delete_request" request_id=object.request.id %}"></a>
+                        {% endif %}
+                        <h5 class="card-title">Deine Anfrage</h5>
+                        <h6 class="card-subtitle mb-2 {% if object.request.status != 2 %}text-muted{% endif %}">{{ object.request.created_at }}</h6>
+                        {{ object.request.text }}
+                    </div>
+                    <div class="card-footer">
+                        {# Check Request Status #}
+                        {% if object.request.status == 1 %}
+                            <span class="text-muted">Warten auf Antwort...</span>
+                        {% elif object.request.status == 2 %}
+                            <span class="text-white">Anfrage angenommen!</span>
+                        {% elif object.request.status == 3 %}
+                            <span class="text-muted">Abgelehnt.</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
