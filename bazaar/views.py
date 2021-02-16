@@ -88,4 +88,3 @@ def get_request_creator(request, offer_id):
         'offer_id': offer_id
     }
     return render(request, "create_request.html", context)
-

@@ -40,7 +40,6 @@ urlpatterns = [
     path("me/request/", get_personal_request_list, name="personal_request_list"),
     path("me/notifications/", get_notifications, name="notification_list"),
     #temp
-    path("myrequests", temp_list, name="temp_list"),
 
     # UserAuth
     path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
