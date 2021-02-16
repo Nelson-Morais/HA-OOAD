@@ -4,8 +4,6 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.db.models import Q
 
-
-
 from notifications.views import add_notification
 from .forms import OfferForm
 from .forms import RequestForm
@@ -18,7 +16,7 @@ def get_offer_list(request, latitude=0, longitude=0):
     context = {
         'offers': offers
     }
-    return render(request, "offerlist.html", context)
+    return render(request, "offer_list.html", context)
 
 
 # displays details of specific offer
@@ -28,7 +26,7 @@ def get_offer(request, offer_id):
     context = {
         'offer': offer
     }
-    return render(request, "offersingle.html", context)
+    return render(request, "offer_single.html", context)
 
 
 # displays offer creation form
@@ -47,31 +45,36 @@ def get_offer_creator(request):
     return render(request, "create_offer.html", context)
 
 
-# displays a list of the users offers
+# displays a list of the users requests to othS er offers
 @login_required(login_url='login')
 def get_personal_offer_list(request):
+    object_list = []
     offers = OfferModel.objects.filter(userowner_id=request.user.id)
+    for offer in offers:
+        requests = RequestModel.objects.filter(~Q(status=3), offer_id=offer.id)
+        object_tuple = {'offer': offer,
+                        'requests': requests}
+        object_list.append(object_tuple)
     context = {
-        'offers': offers
+        'objects': object_list
     }
-    return render(request, "requests.html", context)
+    return render(request, "my_offer_list.html", context)
 
 
 # displays a list of the users requests to othS er offers
 @login_required(login_url='login')
 def get_personal_request_list(request):
-    global reqs
-    templist = []
-    offers = OfferModel.objects.filter(userowner_id=request.user.id)
-    for x in offers:
-        reqs = RequestModel.objects.filter(~Q(status=3), offer_id=x.id)
-        tempdict = {'offer': x,
-                    'reqs': reqs}
-        templist.append(tempdict)
+    object_list = []
+    requests = RequestModel.objects.filter(userowner_id=request.user.id)
+    for req in requests:
+        offer = OfferModel.objects.get(id=req.offer_id)
+        object_tuple = {'request': req,
+                        'offer': offer}
+        object_list.append(object_tuple)
     context = {
-        'offerlist': templist
+        'objects': object_list
     }
-    return render(request, "requests.html", context)
+    return render(request, "my_request_list.html", context)
 
 
 # saves data from request creation form (offer details view)

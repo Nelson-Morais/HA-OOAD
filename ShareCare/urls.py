@@ -31,15 +31,11 @@ urlpatterns = [
     path("offer/create/", get_offer_creator, name="create_offer"),
     path("offer/<int:offer_id>/", get_offer, name="offer_details"),
     path("offer/<int:offer_id>/request/", get_request_creator, name="offer_request_creator"),
-    #temp
-    path("request/create/", get_request_creator, name="create_request"),
-
 
     # Personal Section
     path("me/offer/", get_personal_offer_list, name="personal_offer_list"),
     path("me/request/", get_personal_request_list, name="personal_request_list"),
     path("me/notifications/", get_notifications, name="notification_list"),
-    #temp
 
     # UserAuth
     path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
