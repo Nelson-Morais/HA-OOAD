@@ -10,8 +10,12 @@
             <h1>{{ offer.title }}</h1>
             <h4><small class="text-muted">{{ offer.created_at }}</small></h4>
             <p>{{ offer.description }}</p>
-            <a class="btn btn-success" href="{% url 'offer_request_creator' offer_id=offer.id %}" role="button">Anfrage
-                versenden</a>
+            {% if offer.is_closed %}
+                <p class="card-text"><span class="badge bg-secondary">Geschlossen</span></p>
+            {% else %}
+                <a class="btn btn-success" href="{% url 'offer_request_creator' offer_id=offer.id %}" role="button">Anfrage
+                    versenden</a>
+            {% endif %}
         </div>
         <div class="col-md-6 my-3">
             <img src="{% static "img/ShareCare.png" %}" class="img-fluid img-thumbnail">

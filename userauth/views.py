@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
 
 
-# Create your views here.
+# defines Signup Form
 def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -17,4 +17,7 @@ def signup(request):
             return redirect("welcome")
     else:
         form = SignUpForm()
-    return render(request, "signup.html", { "form": form })
+
+    return render(request, "signup.html", {
+        "form": form
+    })

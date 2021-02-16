@@ -4,11 +4,18 @@
     height: 300px;
     overflow-y: auto;
 }
+
 .dropdown-item.notification {
     white-space: normal;
 }
+
 @media (max-width: 767.98px) {
     .dropdown-menu.notification {
         width: 100%;
     }
+}
+
+/* Opacity */
+.opacity-50 {
+    opacity: 0.5 !important;
 }
