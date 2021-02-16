@@ -4,8 +4,6 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.db.models import Q
 
-
-
 from notifications.views import add_notification
 from .forms import OfferForm
 from .forms import RequestForm
@@ -88,3 +86,24 @@ def get_request_creator(request, offer_id):
         'offer_id': offer_id
     }
     return render(request, "create_request.html", context)
+
+
+def request_accept(request, offer_id, request_id):
+    requests = RequestModel.objects.filter(offer_id=offer_id)
+
+    for x in requests:
+        if x.id == request_id:
+            x.status = 2
+        else:
+            x.status = 3
+    requests.save()
+
+    return render(request, "page_yo", {})
+
+
+def delete_offer(request, offer_id):
+    offer = OfferModel.objects.filter(offer_id)
+    offer.is_deleted = True
+    offer.save()
+
+    return render(request, "page_yo", {})
