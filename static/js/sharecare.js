@@ -1,6 +1,17 @@
-// Handles Notifications in Navbar
+/*
+* Custom JavaScript of the ShareCare Project.
+*
+* @author Kevin Lucas Simon, Nelson Morais, Christina Bernhardt
+* Projekt OOAD Hausarbeit WiSe 2020/21
+*/
+
+/*
+* Handles the Notifications of the Site via AJAX
+*/
 class NotificationHandler {
-    // Downloads JSON Data for Notifications
+    /*
+    * Downloads JSON Data for Notifications
+    */
     loadNotifications() {
         $.getJSON(window.location.origin + "/me/notifications/", function (notification_list) {
             if (notification_list != null) {
@@ -16,7 +27,9 @@ class NotificationHandler {
         })
     }
 
-    // Add Notifications to Notification List
+    /*
+    * Add Notifications to Notification List
+    */
     addNotification(title, text) {
         let dropdown = document.getElementById("notificationDropdown")
         if (dropdown != null) {

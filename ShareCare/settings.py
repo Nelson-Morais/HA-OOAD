@@ -30,7 +30,7 @@ SECRET_KEY = 'lde@iy53%g+c-r7q9=$gtpcf_z(g(sc#-mq2zxj%b!bj7*3r0b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
