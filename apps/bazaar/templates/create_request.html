@@ -8,11 +8,12 @@ Projekt OOAD Hausarbeit WiSe 2020/21
 
 {% load static %}
 
-{% block title %}Meine Angebote{% endblock %}
+{% block title %}Anfrage versenden{% endblock %}
 
 {% block content %}
+    <h1>Anfrage versenden</h1>
     <form action="" method="POST">
         {% include "parts/form.html" %}
-        <button type="submit" class="btn btn-success">Anfrage verschicken</button>
+        <button type="submit" class="btn btn-success">Anfrage versenden</button>
     </form>
 {% endblock %}
