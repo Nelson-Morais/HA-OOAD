@@ -1,11 +1,20 @@
+"""
+Notification Interface for external Apps
+
+@author Kevin Lucas Simon, Nelson Morais, Christina Bernhardt
+Projekt OOAD Hausarbeit WiSe 2020/21
+"""
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-
 from .forms import SignUpForm
 
 
-# defines Signup Form
 def signup(request):
+    """
+    defines the Signup Form
+    :param request: HTTP Request
+    :return: redirects to a page
+    """
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -18,6 +27,6 @@ def signup(request):
     else:
         form = SignUpForm()
 
-    return render(request, "templates/signup.html", {
+    return render(request, "signup.html", {
         "form": form
     })
