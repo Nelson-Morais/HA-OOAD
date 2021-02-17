@@ -23,14 +23,15 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 
-from apps.userauth import views as userauth_views
-from apps.pages.views import get_welcome
 from apps.bazaar.views import OfferView, RequestView
-from apps.notifications.views import get_notifications
+from apps.notifications.views import NotificationView
+from apps.pages.views import PagesView
+from apps.userauth import views as userauth_views
+
 
 urlpatterns = [
     # Pages
-    path("", get_welcome, name="welcome"),
+    path("", PagesView.get_welcome, name="welcome"),
 
     # Bazaar
     path("offer/", OfferView.offers_listing, name="offer_list"),
@@ -44,7 +45,7 @@ urlpatterns = [
     path("me/offer/<int:offer_id>/accept/<int:request_id>", RequestView.accept_request, name="request_accept"),
     path("me/request/", RequestView.personal_request_listing, name="personal_request_list"),
     path("me/request/delete/<int:request_id>", RequestView.delete_request, name="delete_request"),
-    path("me/notifications/", get_notifications, name="notification_list"),
+    path("me/notifications/", NotificationView.get_notifications, name="notification_list"),
 
     # UserAuth
     path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
