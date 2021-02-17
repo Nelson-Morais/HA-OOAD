@@ -132,6 +132,8 @@ class RequestView(View):
             req.is_deleted = True
             req.save()
             add_notification(request.user.id, "Anfrage gelöscht", req.text)
+            offer = OfferModel.objects.filter(is_deleted=False).get(id=req.offer_id)
+            add_notification(offer.userowner_id, "Eingehende Anfrage gelöscht", req.text)
 
         return redirect('personal_request_list')
 

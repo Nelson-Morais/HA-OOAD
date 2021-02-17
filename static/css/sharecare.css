@@ -1,4 +1,13 @@
-/* Notification Bar */
+/*
+Custom CSS of the ShareCare Project.
+
+@author Kevin Lucas Simon, Nelson Morais, Christina Bernhardt
+Projekt OOAD Hausarbeit WiSe 2020/21
+*/
+
+/*
+Notification Bar
+*/
 .dropdown-menu.notification {
     width: 350px;
     height: 300px;
@@ -15,7 +24,9 @@
     }
 }
 
-/* Opacity */
+/*
+Opacity
+*/
 .opacity-50 {
     opacity: 0.5 !important;
 }
