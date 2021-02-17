@@ -1,5 +1,5 @@
 """
-Django bazaar Models
+Message Model describes the DB data of Notifications
 @author Kevin Lucas Simon, Christina Bernhardt ,Nelson Morais
 Projekt OOAD Hausarbeit WiSe 2020/21
 """

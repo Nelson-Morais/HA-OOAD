@@ -1,5 +1,7 @@
 """
-Notification Interface for external Apps
+Django additional User data Model
+
+Used Tutorial: https://grokonez.com/django/django-authentication-login-example-logout-signup-for-custom-user-tutorial
 
 @author Kevin Lucas Simon, Nelson Morais, Christina Bernhardt
 Projekt OOAD Hausarbeit WiSe 2020/21

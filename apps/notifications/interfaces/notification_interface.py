@@ -4,7 +4,7 @@ Notification Interface for external Apps
 @author Kevin Lucas Simon, Nelson Morais, Christina Bernhardt
 Projekt OOAD Hausarbeit WiSe 2020/21
 """
-from apps.notifications.views import add_notification as app_add_notification
+from apps.notifications.views import NotificationView
 
 
 def add_notification(user_id, title, content):
@@ -15,4 +15,4 @@ def add_notification(user_id, title, content):
       :param content: content (text) of the notification
       :return: remote call of the notification handler
       """
-    return app_add_notification(user_id, title, content)
+    return NotificationView.add_notification(user_id, title, content)
