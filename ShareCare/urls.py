@@ -1,4 +1,10 @@
-"""ShareCare URL Configuration
+"""
+Notification Interface for external Apps
+
+@author Kevin Lucas Simon, Nelson Morais, Christina Bernhardt
+Projekt OOAD Hausarbeit WiSe 2020/21
+
+ShareCare URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
