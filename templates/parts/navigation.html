@@ -23,6 +23,10 @@ Projekt OOAD Hausarbeit WiSe 2020/21
             {# Right Side: Authentification ) #}
             <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
+                    {# Create Offer Button #}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "create_offer" %}">Neues Angebot</a>
+                    </li>
                     {# User Controls #}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
