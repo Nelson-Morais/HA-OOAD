@@ -1,0 +1,5 @@
+ShareCare
+Copyright 2021 Christina Bernhardt, Kevin Lucas Simon, NelsonMorais
+
+This product includes software developed for Hochschule Osnabrück
+
